@@ -92,7 +92,7 @@
 		}
 		/** 
 		 * Update know us in client table
-		 * Query Update client_t JOIN reqest_t ON client_t.client_id = request_t.client_id SET client_know_us = '$knowUs' WHERE reqest_t.request_id = $reqeustID
+		 * Query Update client_t JOIN request_t ON client_t.client_id = request_t.client_id SET client_know_us = '$knowUs' WHERE request_t.request_id = $reqeustID
 		*/
 		// Return true is there is no error happen
 	}
