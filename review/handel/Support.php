@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 
 	/** 
 	 * Purpose: check request id and return true if it is int larger than 0
@@ -54,7 +54,7 @@
 	/** 
 	 * Purpose: return the cost of the request
 	 * Type Contract: int -> unsigned double
-	 *   @type $request_id: int
+	 *   @type $requestID: int
 	 *   @returnType: unsigned double
 	 * Example:
 	 *   getCost(200) -> Return 60
@@ -73,14 +73,14 @@
 	}
 	
 	/** 
-	 * Purpose: return the cost of the request
-	 * Type Contract: int -> unsigned double
-	 *   @type $request_id: int
-	 *   @returnType: unsigned double
+	 * Purpose: update know us filed in client table and return true on success
+	 * Type Contract: int, string -> bool
+	 *   @type $requestID: int
+	 *   @type $knowUs: string
+	 *   @returnType: bool
 	 * Example:
-	 *   getCost(200) -> Return 60
-	 *   getCost(300) -> Return 0
-	 *   getCost(400) -> Return 38.25
+	 *   updateKnowUs(400, "صفحتنا") -> Return True
+     *   updateKnowUs(400, "") -> Return False
 	*/
 	static function updateKnowUs(int $reqeustID, string $knowUs): bool {
 		if(checkRequestIDIfUnsigned($requestID) == false){
