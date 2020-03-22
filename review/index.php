@@ -40,6 +40,41 @@ $selectQuery = "SELECT request_id
 
 $result = $conn->query($selectQuery);
 
+$requestID = 5;
+
+/* check request_id is integer */
+function checkRequestIDIfUnsigned($requestID): bool{
+    if(is_int($requestID) == false){
+        return false;
+    }
+    if($requestID <= 0){
+        return false;
+    }
+}
+//check request_id not == 0
+function checkRequestIfExist(int $requestID): bool {
+    if(checkRequestIDIfUnsigned($requestID) == false){
+        return false;
+    }
+    if($requestCount == 0){
+        return false;
+    }
+    else{
+        return true; 
+    }
+}
+
+//check if id in db
+function checkRequesIDInDB($requestID){
+    $requestIdQuery = "SELECT request_id
+                       FROM follow_up_t
+                       WHERE request_id = $requestID";
+    $idResult = $conn->query($requestIdQuery);
+    while ($row = mysql_num_rows($idResult)) {
+        header("location: handel/handelReviewRequest.php");
+    }
+}
+
 ?>
 
 
@@ -195,7 +230,7 @@ $result = $conn->query($selectQuery);
                 <label class="btn btn-outline-success btnActivePrice">
                     <input name="price" type="radio" value="كويسة قوي" class="price">
                     كويسة قوي
-                </label>               
+                </label>
                 <label class="btn btn-outline-primary btnActivePrice">
                     <input name="price" type="radio" value="كويسة" class="price">
                     كويسة
@@ -376,10 +411,6 @@ $result = $conn->query($selectQuery);
         </div>
     </footer>
     
-        
-
-
-
 
     <!--================================================================================================-->
     <script src="js/jquery-3.4.1.min.js"></script>
