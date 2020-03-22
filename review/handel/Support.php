@@ -22,6 +22,7 @@
 		if(requestID <= 0){
 			return false;
 		}
+		return true;
 	}
 	
 	/** 
@@ -72,27 +73,29 @@
 	}
 	
 	/** 
-	 * Purpose: insert a record in the follow up table in the database
-	 * Type Contract: int -> bool
+	 * Purpose: return the cost of the request
+	 * Type Contract: int -> unsigned double
 	 *   @type $request_id: int
-	 *   @returnType: bool
+	 *   @returnType: unsigned double
 	 * Example:
 	 *   getCost(200) -> Return 60
 	 *   getCost(300) -> Return 0
 	 *   getCost(400) -> Return 38.25
 	*/
-	static function Insert(int $requestID, int $paid, string $prices, TechnicalDate $date, Tps $tps, Cleaness $cleaness, BoughtProducts $boughtProduct, double $productCost, int $technicalReview, int $serviceReview, ): double {
+	static function updateKnowUs(int $reqeustID, string $knowUs): bool {
 		if(checkRequestIDIfUnsigned($requestID) == false){
-			return 0;
+			return false;
+		}
+
+		if($knowUs == NULL){
+			return false;
 		}
 		/** 
-		 * Get the cost of request from database which match $requestID and stroe it in $requestCost variable 
-		 * Query SELECT cost FROM request_stagest_t WHERE request_id = $requestID
+		 * Update know us in client table
+		 * Query Update client_t JOIN reqest_t ON client_t.client_id = request_t.client_id SET client_know_us = '$knowUs' WHERE reqest_t.request_id = $reqeustID
 		*/
-		return $requestCost;
+		// Return true is there is no error happen
 	}
-	
-	
 	
 	abstract class TechnicalDate{
 		const Late = 0;
