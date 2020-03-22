@@ -81,7 +81,7 @@
 	 *   getCost(300) -> Return 0
 	 *   getCost(400) -> Return 38.25
 	*/
-	static function getCost(int $requestID): double {
+	static function Insert(int $requestID, int $paid, string $prices, TechnicalDate $date, Tps $tps, Cleaness $cleaness, BoughtProducts $boughtProduct, double $productCost, int $technicalReview, int $serviceReview, ): double {
 		if(checkRequestIDIfUnsigned($requestID) == false){
 			return 0;
 		}
@@ -91,4 +91,27 @@
 		*/
 		return $requestCost;
 	}
+	
+	
+	
+	abstract class TechnicalDate{
+		const Late = 0;
+		const OnTime = 1;
+    }
+	
+	abstract class Tps{
+		const No = 0;
+		const Yes = 1;
+    }
+	
+	abstract class Cleaness{
+		const No = 0;
+		const Yes = 1;
+    }
+	
+	abstract class BoughtProducts{
+		const No = 0;
+		const Yes = 1;
+    }
+	
 ?>
