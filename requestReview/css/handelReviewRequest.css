@@ -1,0 +1,11 @@
+body {
+    font-family: 'Cairo', sans-serif;
+}
+
+.container {
+    height: 100%;
+}
+
+.row {
+    height: 100%;
+}
