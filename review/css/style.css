@@ -355,7 +355,8 @@ footer .copy {
 .error9,
 .error10,
 .error11,
-.error12 {
+.error12,
+.error13 {
     /* background-color: #FF897D; */
     color: red;
     padding: 0 5px;
