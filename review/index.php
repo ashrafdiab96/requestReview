@@ -117,7 +117,7 @@ function checkRequesIDInDB($requestID){
 
 
     <div class="container">
-        <form name="contact" id="contact" action="handel/handelReviewRequest.php" method="GET" onsubmit="return submit(this);">
+        <form name="contact" id="contact" action="handel/handelReviewRequest.php" method="GET" onsubmit="return validation();">
             <fieldset id="behavior">
                 <label>سلوك الفني <span class="requiredStar">*</span></label>
                 <span class="error1">هذا الحقل مطلوب</span>
@@ -361,7 +361,7 @@ function checkRequesIDInDB($requestID){
             </fieldset>
             <hr>
             <fieldset>
-                <button title="إرسال التقييم" class="submit" name="submit" type="submit">تقييم</button>
+                <button title="إرسال التقييم" class="submit" name="submit" type="submit" onclick="return validation()">تقييم</button>
             </fieldset>
         </form>
     </div>
