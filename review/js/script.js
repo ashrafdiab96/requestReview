@@ -93,68 +93,69 @@ for (var i = 0; i < btns.length; i++) {
 }
 
 /* validation of fields */
-let behaviorValidator = document.forms["contact"]["behavior"].value;
-let timeValidator = document.forms["contact"]["time"].value;
-let cleannesseValidator = document.forms["contact"]["cleanness"].value;
-let materialValidator = document.forms["contact"]["material"].value;
-let tpsValidator = document.forms["contact"]["tps"].value;
-let workmanshipValidator = document.forms["contact"]["workmanship"].value;
-let previewValidator = document.forms["contact"]["preview"].value;
-let priceValidator = document.forms["contact"]["price"].value;
-let knowUsAboutValidator = document.forms["contact"]["knowUsAbout"].value;
-let ratingValidator = document.forms["contact"]["rating"].value;
-let replayValidator = document.forms['contact']['replay'].value;
-
 function validation() {
+    var behaviorValidator = document.forms["contact"]["behavior"].value;
+    // alert(behaviorValidator);
     if (behaviorValidator == null || behaviorValidator == "") {
         $(".error1").addClass("show");
         return false;
     }
 
+    var timeValidator = document.forms["contact"]["time"].value;
     if (timeValidator == null || timeValidator == "") {
         $(".error2").addClass("show");
         return false;
     }
 
+    var cleannesseValidator = document.forms["contact"]["cleanness"].value;
     if (cleannesseValidator == null || cleannesseValidator == "") {
         $(".error3").addClass("show");
         return false;
     }
 
+    var materialValidator = document.forms["contact"]["material"].value;
     if (materialValidator == null || materialValidator == "") {
         $(".error4").addClass("show");
         return false;
     }
 
+    var tpsValidator = document.forms["contact"]["tps"].value;
     if (tpsValidator == null || tpsValidator == "") {
         $(".error6").addClass("show");
         return false;
     }
 
+    var workmanshipValidator = document.forms["contact"]["workmanship"].value;
     if (workmanshipValidator == null || workmanshipValidator == "") {
         $(".error7").addClass("show");
         return false;
     }
 
+    var previewValidator = document.forms["contact"]["preview"].value;
     if (previewValidator == null || previewValidator == "") {
         $(".error8").addClass("show");
         return false;
     }
 
+    var priceValidator = document.forms["contact"]["price"].value;
     if (priceValidator == null || priceValidator == "") {
         $(".error9").addClass("show");
         return false;
     }
+
+    var knowUsAboutValidator = document.forms["contact"]["knowUsAbout"].value;
     if (knowUsAboutValidator == null || knowUsAboutValidator == "") {
         $(".error10").addClass("show");
         return false;
     }
 
+    var ratingValidator = document.forms["contact"]["rating"].value;
     if (ratingValidator == null || ratingValidator == "") {
         $(".error11").addClass("show");
         return false;
     }
 
+    var replayValidator = document.forms['contact']['replay'].value;
     if (replayValidator == null || replayValidator == "") {
         $(".error12").addClass("show");
         return false;
