@@ -1,159 +1,133 @@
 <?php
+	include '/handel/support.php';
+	//check connection
+	if ($conn->connect_error) {
+		die ("<h3>فشل الأتصال من فضلك حاول مرة اخرى</h3>");
+	}
+	
+	/* empty variables to carry form data */
+	$behavior = $time = $cleaness = $material = $materialPrice = $tps = "";
+	$workmanship = $workmanshipInp = $preview = $price = $knowUs = $rating = $replay = "";
+	//get request_id
+	//$requestID = $_GET['request_id'];
+	$requestID = 109;
 
-/* empty variables to carry form data */
-$behavior = $time = $cleaness = $material = $materialPrice = $tps = "";
-$workmanship = $workmanshipInp = $preview = $price = $knowUs = $rating = $replay = "";
+	/* get form data */
+	if (isset($_GET['behavior'])) {
+		$behavior = $_GET['behavior'];
+	}
 
-$serverName = "den1.mysql6.gear.host";
-$userName = "sanyaatest";
-$dbPass = "Ko6j1572F7_~";
-$dbName = "sanyaatest";
+	if (isset($_GET['time'])) {
+		$time = $_GET['time'];
+	}
 
-//create connection
-$conn = new mysqli ($serverName , $userName , $dbPass , $dbName);
+	if (isset($_GET['cleanness'])) {
+		$cleaness = $_GET['cleanness'];
+		//mapping
+		function clean($cleanValue){
+			if($cleanValue == "نظف المكان"){
+				return 1;
+			}
+			else{
+				return 0;
+			}
+			$cleanValueInput = array("نظف المكان" , "ساب المكان وحش");
+			array_map("clean" , $cleanValueInput);
+		}
+	}
 
-//check connection
-if ($conn->connect_error) {
-    die ("<h3>فشل الإتصال مع قواعد البيانات</h3><br>".$conn->connect_error);
-}
+	if (isset($_GET['material'])) {
+		$material = $_GET['material'];
+		//mapping
+		function bringMaterial($materialValue){
+			if($materialValue == "جاب خامات"){
+				return 1;
+			}
+			else{
+				return 0;
+			}
+			$materialValueInput = array("جاب خامات" , "ماجابش خامات");
+			array_map("bringMaterial" , $materialValueInput);
+		}
+	}
 
-//get request_id
-//$requestID = $_GET['request_id'];
+	if (isset($_GET['materialPrice'])) {
+		$materialPrice = $_GET['materialPrice'];
+	}
 
-$requestID = 3;
+	if (isset($_GET['tps'])) {
+		$tps = $_GET['tps'];
+		//mapping
+		function takeTps($tpsValue){
+			if($tpsValue == "أخد تبس"){
+				return 1;
+			}
+			else{
+				return 0;
+			}
+			$tpsValueInput = array("أخد تبس" , "ما أخدش تبس");
+			array_map("takeTps" , $tpsValueInput);
+		}
+	}
 
-$selectQuery = "SELECT request_id
-                FROM follow_up_t";
+	if (isset($_GET['workmanshipInp'])) {
+		$workmanshipInp = $_GET['workmanshipInp'];
+	}
 
-$result = $conn->query($selectQuery);
+	if (isset($_GET['workmanship'])) {
+		$workmanship = $_GET['workmanship'];
+	}
 
+	if (isset($_GET['preview'])) {
+		$preview = $_GET['preview'];
+	}
 
-//return request cost
-function getCost(int $requestID): double {
-    $costQuery = "SELECT product_cost
-                  FROM follow_up_t
-                  WHERE request_id = $requestID";
-    $requestCost = mysql_fetch_array($costQuery);
-    if(checkRequestIDIfUnsigned($requestID) == false){
-        return 0;
-    }
-    return $requestCost;
-}
+	if (isset($_GET['price'])) {
+		$price = $_GET['price'];
+	}
 
-//update know us
-$knowUsQuery = "SELECT know_us
-FROM follow_up_t
-WHERE request_id = $requestID";
-$knowUs = $conn->query($knowUsQuery);
+	if (isset($_GET['knowUsAbout'])) {
+		$knowUs = $_GET['knowUsAbout'];
+	}
 
-function updateKnowUs(int $reqeustID, string $knowUs): bool {
-    if(checkRequestIDIfUnsigned($requestID) == false){
-        return false;
-    }
-    if($knowUs == NULL){
-        return false;
-    }
-    else{
-        return true;
-    }
-}
+	if (isset($_GET['rating'])) {
+		$rating = $_GET['rating'];
+	}
 
-/* get form data */
-if (isset($_GET['behavior'])) {
-    $behavior = $_GET['behavior'];
-}
+	if (isset($_GET['replay'])) {
+		$replay = $_GET['replay'];
+	}
 
-if (isset($_GET['time'])) {
-    $time = $_GET['time'];
-}
+	echo $requestID; echo "\r\n";
 
-if (isset($_GET['cleanness'])) {
-    $cleaness = $_GET['cleanness'];
-    //mapping
-    function clean($cleanValue){
-        if($cleanValue == "نظف المكان"){
-            return 1;
-        }
-        else{
-            return 0;
-        }
-        $cleanValueInput = array("نظف المكان" , "ساب المكان وحش");
-        array_map("clean" , $cleanValueInput);
-    }
-}
+	echo $behavior; echo "\r\n";
+	
+	echo $time; echo "\r\n";
+	
+	echo $cleaness;	echo "\r\n";
 
-if (isset($_GET['material'])) {
-    $material = $_GET['material'];
-    //mapping
-    function bringMaterial($materialValue){
-        if($materialValue == "جاب خامات"){
-            return 1;
-        }
-        else{
-            return 0;
-        }
-        $materialValueInput = array("جاب خامات" , "ماجابش خامات");
-        array_map("bringMaterial" , $materialValueInput);
-    }
-}
+	echo $material;	echo "\r\n";
 
-if (isset($_GET['materialPrice'])) {
-    $materialPrice = $_GET['materialPrice'];
-}
+	$materialPrice = 0;
+	echo $materialPrice; echo "\r\n";
 
-if (isset($_GET['tps'])) {
-    $tps = $_GET['tps'];
-    //mapping
-    function takeTps($tpsValue){
-        if($tpsValue == "أخد تبس"){
-            return 1;
-        }
-        else{
-            return 0;
-        }
-        $tpsValueInput = array("أخد تبس" , "ما أخدش تبس");
-        array_map("takeTps" , $tpsValueInput);
-    }
-}
+	echo $tps; echo "\r\n";
 
-if (isset($_GET['workmanshipInp'])) {
-    $workmanshipInp = $_GET['workmanshipInp'];
-}
+	//echo $workmanship;	echo "\r\n";
 
-if (isset($_GET['workmanship'])) {
-    $workmanship = $_GET['workmanship'];
-}
+	echo $workmanshipInp;	echo "\r\n";
 
-if (isset($_GET['preview'])) {
-    $preview = $_GET['preview'];
-}
+	$preview = 5;
+	echo $preview;	echo "\r\n";
 
-if (isset($_GET['price'])) {
-    $price = $_GET['price'];
-}
+	echo $price;	echo "\r\n";
 
-if (isset($_GET['knowUsAbout'])) {
-    $knowUs = $_GET['knowUsAbout'];
-}
+	echo $knowUs; 	echo "\r\n";
 
-if (isset($_GET['rating'])) {
-    $rating = $_GET['rating'];
-}
+	echo $rating;	echo "\r\n";
 
-if (isset($_GET['replay'])) {
-    $replay = $_GET['replay'];
-}
-
-//insert data into db
-$insertQuery = "INSERT INTO follow_up_t
-(paid , prices , time , tps , reason , cleaness , rate , product , product_cost , review , behavior , know_us)
-VALUES
-($workmanship , '$price' , '$time' , '$tps' , '$preview' , '$cleaness' , '$rating' , '$material' , '$materialPrice' , '$replay' , '$behavior' , '$knowUs' )";
-
-// run the query
-$result = $conn->query($insertQuery);
-
-
+	echo $replay; 
+	insert($conn, $requestID, $workmanshipInp, $price, $time, $tps, $cleaness, $material, $materialPrice, $preview, $rating, $replay, $behavior);
 ?>
 
 

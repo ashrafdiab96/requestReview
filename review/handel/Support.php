@@ -1,56 +1,82 @@
 ﻿<?php
 
+	/* connect to database */
+	$serverName = "den1.mysql6.gear.host";
+	$userName = "sanyaatest";
+	$dbPass = "Ko6j1572F7_~";
+	$dbName = "sanyaatest";
+	$conn = new mysqli ($serverName , $userName , $dbPass , $dbName);
+	
 	/** 
 	 * Purpose: check request id and return true if it is int larger than 0
 	 * Type Contract: mixed -> unsigned int
 	 *   @type $requestID: mixed
 	 *   @returnType: unsigned int
 	 * Example:
-	 *   checkRequestIfExist(200) -> Return True
-	 *   checkRequestIfExist(0) -> Return False
-	 *   checkRequestIfExist(200.1) -> Return False
-	 *   checkRequestIfExist(-10) -> Return False
-	 *   checkRequestIfExist(-10.5) -> Return False
-	 *   checkRequestIfExist("string") -> Return False
+	 *   checkRequestIDIfUnsigned(200) -> Return True
+	 *   checkRequestIDIfUnsigned(0) -> Return False
+	 *   checkRequestIDIfUnsigned(200.1) -> Return False
+	 *   checkRequestIDIfUnsigned(-10) -> Return False
+	 *   checkRequestIDIfUnsigned(-10.5) -> Return False
+	 *   checkRequestIDIfUnsigned("string") -> Return False
 	*/
-	static function checkRequestIDIfUnsigned($requestID) {
+    function checkRequestIDIfUnsigned($requestID) {
 		if(ctype_digit($requestID)){
-		if($requestID > 0){
-			return true;
-		}else{
+			if($requestID > 0){
+				return true;
+			}else{
+				return false;
+			}
+		}
+		else{
 			return false;
 		}
 	}
-	else{
-		return false;
-	}
 	
 	/** 
-	 * Purpose: return false if the request not exist in follow_up_t table
+	 * Purpose: return true if the request exist in the request table
 	 * Type Contract: unsigned int -> bool
 	 *   @type $requestID: unsigned int
 	 *   @returnType: bool
 	 * Example:
-	 *   checkRequestIfExist(200) -> Return True
-	 *   checkRequestIfExist(202) -> Return False
+	 *   checkRequestIfExist(113) -> Return True
+	 *   checkRequestIfExist(100000) -> Return False
 	*/
-	static function checkRequestIfExist(int $requestID) {
-		if(checkRequestIDIfUnsigned($requestID) == false){
-			return false;
-		}
-		/** 
-		 * Get request_count from database which match $requestID and stroe it in $requestCount variable 
-		 * Query SELECT COUNT(request_id) AS request_count FROM follow_up_t WHERE request_id = $requestID
-		*/
-		
-		if($requestCount == 0){
-			return false;
+    function checkRequestIfExist($requestID, $conn) {
+		$sqlQuery = "SELECT COUNT(request_id) AS request_count
+                       FROM request_t
+                       WHERE request_id = $requestID";
+		$requestCount = sqlExcuteScaler($sqlQuery, $conn);
+		if((int)$requestCount >= 1){
+			return true;
 		}
 		else{
-			return true; 
+			return false; 
 		}
 	}
-
+	
+	/** 
+	 * Purpose: return true if the request is exist in the follow up table
+	 * Type Contract: unsigned int -> bool
+	 *   @type $requestID: unsigned int
+	 *   @returnType: bool
+	 * Example:
+	 *   checkRequestIfReviewed(200) -> Return False
+	 *   checkRequestIfReviewed(202) -> Return True
+	*/
+    function checkRequestIfReviewed($requestID, $conn) {
+		$sqlQuery = "SELECT COUNT(request_id) AS request_count
+                       FROM follow_up_t
+                       WHERE request_id = $requestID";
+		$requestCount = sqlExcuteScaler($sqlQuery, $conn);
+		if((int)$requestCount >= 1){
+			return true;
+		}
+		else{
+			return false; 
+		}
+	}
+	
 	/** 
 	 * Purpose: return the cost of the request
 	 * Type Contract: int -> unsigned double
@@ -61,15 +87,75 @@
 	 *   getCost(300) -> Return 0
 	 *   getCost(400) -> Return 38.25
 	*/
-	static function getCost(int $requestID): double {
-		if(checkRequestIDIfUnsigned($requestID) == false){
-			return 0;
+	function getCost($requestID, $conn) {
+		$query = "SELECT cost FROM request_stages_t WHERE request_id = $requestID";
+		$cost = sqlExcuteScaler($query, $conn);
+		return $cost;
+	}
+	
+	/** 
+	 * Purpose: return the first field in the first row of the query result
+	 * Type Contract: string -> mixed
+	 *   @type $query: string
+	 *   @type $conn: mysql connection
+	 *   @returnType: string
+	 * Example:
+	 *   checkRequestIfExist(200) -> Return True
+	 *   checkRequestIfExist(202) -> Return False
+	*/
+    function sqlExcuteScaler($query, $conn) {
+		$sqlResult = $conn->query($query);
+		if($sqlResult){
+			while($row = mysqli_fetch_array($sqlResult)){
+				$resultScaler = $row[0];
+				break;
+			}
+			return $resultScaler;
 		}
-		/** 
-		 * Get the cost of request from database which match $requestID and stroe it in $requestCost variable 
-		 * Query SELECT cost FROM request_stagest_t WHERE request_id = $requestID
-		*/
-		return $requestCost;
+		else{
+			return "-1";
+		}
+	}
+
+	/** 
+	 * Purpose: insert a record into follow up table
+	 * Type Contract: 
+	 *   
+	 * Example:
+	 *   Insert
+	 *   Insert
+	*/
+	function insert($conn, $requestID, $paid, $prices, $time, $tps, $cleaness, $product, $productCost, $technicalRate, $serviceRate, $clientReview, $behavior){
+		$query = "INSERT INTO follow_up_t
+			(request_id,
+			 paid,
+			 prices,
+			 time,
+			 tps,
+			 reason,
+			 cleaness,
+			 rate,
+			 product,
+			 product_cost,
+			 review,
+			 behavior,
+			 system_user_id)
+			VALUES
+			('$requestID',
+			 '$paid',
+			 '$prices',
+			 '$time',
+			 '$tps',
+			 '$technicalRate',
+			 '$cleaness',
+			 '$serviceRate',
+			 '$product',
+			 '$productCost',
+			 '$clientReview',
+			 '$behavior',
+			 '1')";
+			 echo $query;
+			 $sqlResult = $conn->query($query);
 	}
 	
 	/** 
@@ -80,8 +166,10 @@
 	 *   @returnType: bool
 	 * Example:
 	 *   updateKnowUs(400, "صفحتنا") -> Return True
-     *   updateKnowUs(400, "") -> Return False
+	 *   updateKnowUs(400, "") -> Return False
 	*/
+	
+	/**
 	static function updateKnowUs(int $reqeustID, string $knowUs) {
 		if(checkRequestIDIfUnsigned($requestID) == false){
 			return false;
@@ -93,8 +181,9 @@
 		/** 
 		 * Update know us in client table
 		 * Query Update client_t JOIN request_t ON client_t.client_id = request_t.client_id SET client_know_us = '$knowUs' WHERE request_t.request_id = $reqeustID
-		*/
+		/
 		// Return true is there is no error happen
 	}
-	
+	*/
+//}
 ?>

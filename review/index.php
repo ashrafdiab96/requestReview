@@ -1,80 +1,30 @@
 
 <?php
+	include '/handel/support.php';
+	
+	
+	//get request_id
+	$request_id = 0;
+	$request_id = $_GET['id'];
 
-/* connect with database */
-//variables to carry db info
-/*
-$serverName = "localhost";
-$userName = "root";
-$dbPass = "";
-$dbName = "sanyaadelivery";
+	if(!checkRequestIDIfUnsigned($request_id)){
+		header("Location: error.html"); die;
+	}
 
-//create connection
-$conn = new mysqli ($serverName , $userName , $dbPass , $dbName);
-
-//check connection
-if ($conn->connect_error) {
-    die ("<h3>فشل الإتصال مع قواعد البيانات</h3><br>".$conn->connect_error);
-}
-
-$selectQuery = "SELECT request_id
-                FROM follow_up_t";
-
-$result = $conn->query($selectQuery);
-*/
-$serverName = "den1.mysql6.gear.host";
-$userName = "sanyaatest";
-$dbPass = "Ko6j1572F7_~";
-$dbName = "sanyaatest";
-
-//create connection
-$conn = new mysqli ($serverName , $userName , $dbPass , $dbName);
-
-//check connection
-if ($conn->connect_error) {
-    die ("<h3>فشل الإتصال مع قواعد البيانات</h3><br>".$conn->connect_error);
-}
-
-//$selectQuery = "SELECT request_id
-//                FROM follow_up_t";
-
-//$result = $conn->query($selectQuery);
-
-$requestID = 5;
-
-/* check request_id is integer */
-function checkRequestIDIfUnsigned($requestID): bool{
-    if(is_int($requestID) == false){
-        return false;
-    }
-    if($requestID <= 0){
-        return false;
-    }
-}
-//check request_id not == 0
-function checkRequestIfExist(int $requestID): bool {
-    if(checkRequestIDIfUnsigned($requestID) == false){
-        return false;
-    }
-    if($requestCount == 0){
-        return false;
-    }
-    else{
-        return true; 
-    }
-}
-
-//check if id in db
-function checkRequesIDInDB($requestID){
-    $requestIdQuery = "SELECT request_id
-                       FROM follow_up_t
-                       WHERE request_id = $requestID";
-    $idResult = $conn->query($requestIdQuery);
-    while ($row = mysql_num_rows($idResult)) {
-        header("location: handel/handelReviewRequest.php");
-    }
-}
-
+	//check connection
+	if ($conn->connect_error) {
+		die ("<h3>فشل الأتصال من فضلك حاول مرة اخرى</h3>");
+	}
+	
+	if(!checkRequestIfExist($request_id, $conn)){
+		header("Location: error.html"); die;
+	}
+	
+	if(checkRequestIfReviewed($request_id, $conn)){
+		header("Location: thanks.html"); die;
+	}
+	
+	$cost = getCost($request_id, $conn);
 ?>
 
 
@@ -151,11 +101,11 @@ function checkRequesIDInDB($requestID){
                 <span class="error2">هذا الحقل مطلوب</span>
                 <br>
                 <label class="btn btn-outline-success btnActiveTime">
-                    <input name="time" type="radio" id="x" value="جه في ميعاده" class="time">
+                    <input name="time" type="radio" id="x" value="1" class="time">
                     جه في ميعاده
                 </label>
                 <label class="btn btn-outline-danger btnActiveTime">
-                    <input name="time" type="radio" value="مجاش في ميعاده" class="time">
+                    <input name="time" type="radio" value="0" class="time">
                     مجاش في ميعاده
                 </label>
             </fieldset>
@@ -165,11 +115,11 @@ function checkRequesIDInDB($requestID){
                 <span class="error3">هذا الحقل مطلوب</span>
                 <br>
                 <label class="btn btn-outline-success btnActiveCleanness">
-                    <input name="cleanness" type="radio" value="نظف المكان" class="clean">
+                    <input name="cleanness" type="radio" value="1" class="clean">
                     نظف المكان
                 </label>
                 <label class="btn btn-outline-danger btnActiveCleanness">
-                    <input name="cleanness" type="radio" value="ساب المكان وحش" class="clean">
+                    <input name="cleanness" type="radio" value="0" class="clean">
                     ساب المكان وحش
                 </label>
                 <br>
@@ -180,11 +130,11 @@ function checkRequesIDInDB($requestID){
                 <span class="error4">هذا الحقل مطلوب</span>
                 <br>
                 <label class="btn btn-outline-success btnActiveMaterial" id="materialBtnYes">
-                    <input name="material" type="radio" value="جاب خامات" class="material">
+                    <input name="material" type="radio" value="1" class="material">
                     جاب خامات
                 </label>
                 <label class="btn btn-outline-danger btnActiveMaterial" id="materialBtnNo">
-                    <input name="material" type="radio" value="ماجابش خامات" class="material">
+                    <input name="material" type="radio" value="0" class="material">
                     ماجابش خامات
                 </label>
             </fieldset>
@@ -199,11 +149,11 @@ function checkRequesIDInDB($requestID){
                 <span class="error6">هذا الحقل مطلوب</span>
                 <br>
                 <label class="btn btn-outline-success btnActiveTps">
-                    <input name="tps" type="radio" value="أخد تبس" class="tps">
+                    <input name="tps" type="radio" value="1" class="tps">
                     أخد تبس
                 </label>
                 <label class="btn btn-outline-danger btnActiveTps">
-                    <input name="tps" type="radio" value="ما أخدش تبس" class="tps">
+                    <input name="tps" type="radio" value="0" class="tps">
                     ما أخدش تبس
                 </label>
             </fieldset>
@@ -212,15 +162,9 @@ function checkRequesIDInDB($requestID){
                 <label>المصنعية <span class="requiredStar">*</span></label>
                 <span class="error7">هذا الحقل مطلوب</span>
                 <input placeholder="أخد منك المصنعية قد أيه ( إختياري )" type="text" name="workmanshipInp" class="workmanship"><br>
-
-                <?php
-
-                while ($row = mysqli_fetch_array($result)) {
-                    //echo "<input type='radio' name='workmanship' value='$row[0]' require> <label> $row[0] </label><br>";
-                }
-
-                ?>
-
+				<?php
+					echo "<input type='radio' name='workmanship' value='$cost' require> <label>$cost</label><br>";
+				?>
             </fieldset>
             <hr>
             <fieldset id="price">
@@ -253,16 +197,16 @@ function checkRequesIDInDB($requestID){
                 <label>عرفتنا ازاي <span class="requiredStar">*</span></label>
                 <span class='error10'>هذا الحقل مطلوب</span>
                 <div class="knowUsAbout">
-                    <input type="radio" id="facebook" name="knowUsAbout" value="فيس بوك" class="knowUs">
+                    <input type="radio" id="facebook" name="knowUsAbout" value="صفحتنا" class="knowUs">
                     <label title="صفحة الفيس بوك">
                         <i class="fab fa-facebook-square fa-2x"></i>
-                        <span> صفحتنا على الفيس بوك </span>
+                        <span>صفحتنا على الفيس بوك</span>
                     </label>
                     <br>
-                    <input type="radio" id="twitter" name="knowUsAbout" value="تويتر" class="knowUs">
+                    <input type="radio" id="twitter" name="knowUsAbout" value="جروبات" class="knowUs">
                     <label title="تويتر">
                         <i class="fab fa-twitter-square fa-2x"></i>
-                        <span> تويتر </span>
+                        <span>جروبات الفيس بوك</span>
                     </label>
                     <br>
                     <input type="radio" id="webSite" name="knowUsAbout" value="صفحتنا" class="knowUs">
@@ -294,23 +238,23 @@ function checkRequesIDInDB($requestID){
             <fieldset class="preview">
             <label>تقييم الفني <span class="requiredStar">*</span></label>
                 <div class="star-rating">
-                    <input id="star-1" type="radio" name="rating" value="خمس نجمات" class="preview">
+                    <input id="star-1" type="radio" name="rating" value="5" class="preview">
 			        <label for="star-1" title="5 stars">
 					    <i class="active fa fa-star" aria-hidden="true"></i>
                     </label>
-                    <input id="star-2" type="radio" name="rating" value="أربع نجمات" class="preview">
+                    <input id="star-2" type="radio" name="rating" value="4" class="preview">
 		 	        <label for="star-2" title="4 stars">
 					    <i class="active fa fa-star" aria-hidden="true"></i>
                     </label>
-                    <input id="star-3" type="radio" name="rating" value="ثلاث نجمات" class="preview">
+                    <input id="star-3" type="radio" name="rating" value="3" class="preview">
 			        <label for="star-3" title="3 stars">
 					    <i class="active fa fa-star" aria-hidden="true"></i>
                     </label>
-                    <input id="star-4" type="radio" name="rating" value="نجمتان" class="preview">
+                    <input id="star-4" type="radio" name="rating" value="2" class="preview">
 			        <label for="star-4" title="2 stars">
 					    <i class="active fa fa-star" aria-hidden="true"></i>
 			        </label>
-			        <input id="star-5" type="radio" name="rating" value="نجمة واحدة" class="preview">
+			        <input id="star-5" type="radio" name="rating" value="1" class="preview">
 			        <label for="star-5" title="1 star">
 					    <i class="active fa fa-star" aria-hidden="true"></i>
 			        </label>
@@ -321,23 +265,23 @@ function checkRequesIDInDB($requestID){
             <fieldset class="ratingSystem">
                 <label>تقييم الخدمة <span class="requiredStar">*</span></label>
                 <div class="star-rating">
-                    <input id="star-1" type="radio" name="rating" value="خمس نجمات" class="ratingSystem">
+                    <input id="star-1" type="radio" name="rating" value="5" class="ratingSystem">
 			        <label for="star-1" title="5 stars">
 					    <i class="active fa fa-star" aria-hidden="true"></i>
                     </label>
-                    <input id="star-2" type="radio" name="rating" value="أربع نجمات" class="ratingSystem">
+                    <input id="star-2" type="radio" name="rating" value="4" class="ratingSystem">
 		 	        <label for="star-2" title="4 stars">
 					    <i class="active fa fa-star" aria-hidden="true"></i>
                     </label>
-                    <input id="star-3" type="radio" name="rating" value="ثلاث نجمات" class="ratingSystem">
+                    <input id="star-3" type="radio" name="rating" value="3" class="ratingSystem">
 			        <label for="star-3" title="3 stars">
 					    <i class="active fa fa-star" aria-hidden="true"></i>
                     </label>
-                    <input id="star-4" type="radio" name="rating" value="نجمتان" class="ratingSystem">
+                    <input id="star-4" type="radio" name="rating" value="2" class="ratingSystem">
 			        <label for="star-4" title="2 stars">
 					    <i class="active fa fa-star" aria-hidden="true"></i>
 			        </label>
-			        <input id="star-5" type="radio" name="rating" value="نجمة واحدة" class="ratingSystem">
+			        <input id="star-5" type="radio" name="rating" value="1" class="ratingSystem">
 			        <label for="star-5" title="1 star">
 					    <i class="active fa fa-star" aria-hidden="true"></i>
 			        </label>
