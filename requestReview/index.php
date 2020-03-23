@@ -1,34 +1,36 @@
 
 <?php
+	include '/handel/support.php';
+	
+	//get request_id
+	$request_id = 0;
+	$request_id = $_GET['id'];
 
-/* connect with database */
-//variables to carry db info
-$serverName = "localhost";
-$userName = "root";
-$dbPass = "";
-$dbName = "sanyaadelivery";
+	if(!checkRequestIDIfUnsigned($request_id)){
+		header("Location: error.html"); die;
+	}
 
-//create connection
-$conn = new mysqli ($serverName , $userName , $dbPass , $dbName);
-
-//check connection
-if ($conn->connect_error) {
-    die ("<h3>فشل الإتصال مع قواعد البيانات</h3><br>".$conn->connect_error);
-}
-
-$selectQuery = "SELECT request_id
-                FROM follow_up_t";
-
-$result = $conn->query($selectQuery);
+	//check connection
+	if ($conn->connect_error) {
+		die ("<h3>فشل الأتصال من فضلك حاول مرة اخرى</h3>");
+	}
+	
+	if(!checkRequestIfExist($request_id, $conn)){
+		header("Location: error.html"); die;
+	}
+	
+	if(checkRequestIfReviewed($request_id, $conn)){
+		header("Location: thanks.html"); die;
+	}
+	
+	$cost = getCost($request_id, $conn);
 
 ?>
 
 
 <html>
-
     <head>
         <title>متابعة الطلب</title>
-
 
         <meta charset="UTF-8">
         <!--================================================================================================-->
@@ -63,7 +65,7 @@ $result = $conn->query($selectQuery);
 
 
     <div class="container">
-        <form name="contact" id="contact" action="handel/handelReviewRequest.php" method="GET" onsubmit="return validation()">
+        <form name="contact" id="contact" action="handel/handelReviewRequest.php method="GET"  onsubmit="return validation()">
             <fieldset id="behavior">
                 <label>سلوك الفني <span class="requiredStar">*</span></label>
                 <span class="error1">هذا الحقل مطلوب</span>
@@ -82,8 +84,8 @@ $result = $conn->query($selectQuery);
                         مقبول
                     </label>
                     <label class="btn btn-outline-warning btnActiveBehavior">
-                        <input name="behavior" type="radio" class="behaviorError" value="سيئ">
-                        سيئ
+                        <input name="behavior" type="radio" class="behaviorError" value="سئ">
+                        سئ
                     </label>
                     <label class="btn btn-outline-danger btnActiveBehavior">
                         <input name="behavior" type="radio" class="behaviorError" value="سيئ جدا">
@@ -158,14 +160,8 @@ $result = $conn->query($selectQuery);
                 <label>المصنعية <span class="requiredStar">*</span></label>
                 <span class="error7">هذا الحقل مطلوب</span>
                 <input placeholder="أخد منك المصنعية قد أيه ( إختياري )" type="text" name="workmanshipInp"><br>
-                <input type="radio" name="workmanship" value="25"> <label> 25 </label><br>
-
                 <?php
-
-                while ($row = mysqli_fetch_array($result)) {
-                    echo "<input type='radio' name='workmanship' value='$row[0]' require> <label> $row[0] </label><br>";
-                }
-
+                    echo "<input type='radio' name='workmanship' value='$cost' require> <label> $cost </label><br>";
                 ?>
 
             </fieldset>
@@ -200,13 +196,13 @@ $result = $conn->query($selectQuery);
                 <label>عرفتنا ازاي <span class="requiredStar">*</span></label>
                 <span class='error10'>هذا الحقل مطلوب</span>
                 <div class="knowUsAbout">
-                    <input type="radio" id="facebook" name="knowUsAbout" value="فيس بوك">
+                    <input type="radio" id="facebook" name="knowUsAbout" value="صفحتنا">
                     <label title="صفحة الفيس بوك">
                         <i class="fab fa-facebook-square fa-2x"></i>
                         <span> صفحتنا على الفيس بوك </span>
                     </label>
                     <br>
-                    <input type="radio" id="twitter" name="knowUsAbout" value="تويتر">
+                    <input type="radio" id="twitter" name="knowUsAbout" value="عميل">
                     <label title="تويتر">
                         <i class="fab fa-twitter-square fa-2x"></i>
                         <span> تويتر </span>
@@ -218,19 +214,19 @@ $result = $conn->query($selectQuery);
                         <span>موقعنا على الانترنت </span>
                     </label>
                     <br>
-                    <input type="radio" id="friend" name="knowUsAbout" value="صديق-جار">
+                    <input type="radio" id="friend" name="knowUsAbout" value="صديق">
                     <label title="جار-صديق">
                         <i class="fas fa-user-friends fa-2x"></i>
                         <span> جار - صديق </span>
                     </label>
                     <br>
-                    <input type="radio" id="banner" name="knowUsAbout" value="يافطة">
+                    <input type="radio" id="banner" name="knowUsAbout" value="جيران">
                     <label title="يافطة">
                         <i class="fas fa-band-aid fa-2x"></i>
                         <span> يافطة إعلانية </span>
                     </label>
                     <br>
-                    <input type="radio" id="advertising" name="knowUsAbout" value="الإعلانات المطبوعة">
+                    <input type="radio" id="advertising" name="knowUsAbout" value="اعلانات">
                     <label title="الإعلانات المطبوعة">
                         <i class="fas fa-ad fa-2x"></i>
                         <span> الإعلانات المطبوعة </span>

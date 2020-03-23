@@ -35,10 +35,10 @@ if ($conn->connect_error) {
     die ("<h3>فشل الإتصال مع قواعد البيانات</h3><br>".$conn->connect_error);
 }
 
-$selectQuery = "SELECT request_id
-                FROM follow_up_t";
+//$selectQuery = "SELECT request_id
+//                FROM follow_up_t";
 
-$result = $conn->query($selectQuery);
+//$result = $conn->query($selectQuery);
 
 $requestID = 5;
 

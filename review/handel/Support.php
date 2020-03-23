@@ -13,16 +13,16 @@
 	 *   checkRequestIfExist(-10.5) -> Return False
 	 *   checkRequestIfExist("string") -> Return False
 	*/
-	static function checkRequestIDIfUnsigned($requestID): bool {
-		
-		if(is_int($requestID) == false){
+	static function checkRequestIDIfUnsigned($requestID) {
+		if(ctype_digit($requestID)){
+		if($requestID > 0){
+			return true;
+		}else{
 			return false;
 		}
-		
-		if(requestID <= 0){
-			return false;
-		}
-		return true;
+	}
+	else{
+		return false;
 	}
 	
 	/** 
@@ -34,7 +34,7 @@
 	 *   checkRequestIfExist(200) -> Return True
 	 *   checkRequestIfExist(202) -> Return False
 	*/
-	static function checkRequestIfExist(int $requestID): bool {
+	static function checkRequestIfExist(int $requestID) {
 		if(checkRequestIDIfUnsigned($requestID) == false){
 			return false;
 		}
@@ -82,7 +82,7 @@
 	 *   updateKnowUs(400, "صفحتنا") -> Return True
      *   updateKnowUs(400, "") -> Return False
 	*/
-	static function updateKnowUs(int $reqeustID, string $knowUs): bool {
+	static function updateKnowUs(int $reqeustID, string $knowUs) {
 		if(checkRequestIDIfUnsigned($requestID) == false){
 			return false;
 		}
@@ -96,25 +96,5 @@
 		*/
 		// Return true is there is no error happen
 	}
-	
-	abstract class TechnicalDate{
-		const Late = 0;
-		const OnTime = 1;
-    }
-	
-	abstract class Tps{
-		const No = 0;
-		const Yes = 1;
-    }
-	
-	abstract class Cleaness{
-		const No = 0;
-		const Yes = 1;
-    }
-	
-	abstract class BoughtProducts{
-		const No = 0;
-		const Yes = 1;
-    }
 	
 ?>

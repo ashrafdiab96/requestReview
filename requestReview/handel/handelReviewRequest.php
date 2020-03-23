@@ -1,29 +1,15 @@
 <?php
-
-//for test
-//echo "hallo";
-
-/* empty variables to carry form data */
+include '/handel/support.php';
+//check connection
+	if ($conn->connect_error) {
+		die ("<h3>فشل الأتصال من فضلك حاول مرة اخرى</h3>");
+	}
+	
 $behavior = $time = $cleaness = $material = $materialPrice = $tps = "";
 $workmanship = $workmanshipInp = $preview = $price = $knowUs = $rating = $replay = "";
 
-/* connect with database */
-/* variables to carry db info */
-$serverName = "localhost";
-$userName = "root";
-$dbPass = "";
-$dbName = "sanyaadelivery";
-
-/* create connection */
-$conn = new mysqli ($serverName , $userName , $dbPass , $dbName);
-
-/* check connection */
-if ($conn->connect_error) {
-    die ("<h3>فشل الإتصال مع قواعد البيانات</h3><br>".$conn->connect_error);
-}
-
 //to define arabic language
-mysqli_set_charset($conn,'utf8');
+//mysqli_set_charset($conn,'utf8');
 
 /* get form data */
 if (isset($_GET['behavior'])) {
@@ -78,12 +64,21 @@ if (isset($_GET['replay'])) {
     $replay = $_GET['replay'];
 }
 
-// for test
-// echo $behavior."<br>".$time."<br>".$cleaness."<br>".$material."<br>".$materialPrice."<br>".$tps."<br>";
-// echo $workmanship."<br>".$workmanshipInp."<br>".$preview."<br>".$price."<br>".$knowUs."<br>";
-// echo $rating."<br>".$replay."<br>";
-
+echo $behavior;
+echo $time;
+echo $cleaness;
+echo $material;
+echo $materialPrice;
+echo $tps;
+echo $workmanship;
+echo $workmanshipInp;
+echo $preview;
+echo $price;
+echo $knowUs; 
+echo $rating;
+echo $replay; 
 //insert data into db
+/**
 $insertQuery = "INSERT INTO follow_up_t
 (paid , prices , time , tps , reason , cleaness , rate , product , product_cost , review , behavior , know_us)
 VALUES
@@ -91,7 +86,7 @@ VALUES
 
 // run the query
 $result = $conn->query($insertQuery);
-
+*/
 // echo "<div class='container'>
 //         <div class='row'>
 //             <div class='col'>
@@ -103,42 +98,3 @@ $result = $conn->query($insertQuery);
 ?>
 
 
-<html>
-<head>
-        <title>متابعة الطلب</title>
-
-
-        <meta charset="UTF-8">
-        <!--================================================================================================-->
-        <link rel="icon" href="../images/icons/icons8-new-message-30.png">
-        <!--================================================================================================-->
-        <link rel="stylesheet" href="../css/all.min.css">
-        <!--================================================================================================-->
-        <link rel="stylesheet" href="../css/bootstrap.min.css">
-        <!--================================================================================================-->
-        <link href="https://fonts.googleapis.com/css?family=Cairo&display=swap" rel="stylesheet">
-        <!--================================================================================================-->
-        <link rel="stylesheet" href="../css/handelReviewRequest.css">
-
-    </head>
-
-    <body>
-
-    <div class='container'>
-        <div class='row'>
-            <div class='col d-flex justify-content-center align-items-center'>
-                <h2> لقد تم إرسال التقييم بنجاح, نشكركم على وقتكم </h2>
-            </div>
-        </div>
-    </div>
-
-    <!--================================================================================================-->
-    <script src="../js/jquery-3.4.1.min.js"></script>
-    <!--================================================================================================-->
-    <script src="../js/popper.min.js"></script>
-    <!--================================================================================================-->
-    <script src="../js/bootstrap.min.js"></script>
-    <!--================================================================================================-->
-     
-    </body>
-</html>
