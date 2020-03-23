@@ -1,3 +1,4 @@
+// alert("welcome55555");
 (function($) {
 
     /* show material price field if getting material */
@@ -92,80 +93,78 @@ for (var i = 0; i < btns.length; i++) {
 }
 
 /* validation of fields */
+let behaviorValidator = document.forms["contact"]["behavior"].value;
+let timeValidator = document.forms["contact"]["time"].value;
+let cleannesseValidator = document.forms["contact"]["cleanness"].value;
+let materialValidator = document.forms["contact"]["material"].value;
+let tpsValidator = document.forms["contact"]["tps"].value;
+let workmanshipValidator = document.forms["contact"]["workmanship"].value;
+let previewValidator = document.forms["contact"]["preview"].value;
+let priceValidator = document.forms["contact"]["price"].value;
+let knowUsAboutValidator = document.forms["contact"]["knowUsAbout"].value;
+let ratingValidator = document.forms["contact"]["rating"].value;
+let replayValidator = document.forms['contact']['replay'].value;
+
 function validation() {
-
-    let behaviorValidator = $("input[name='behavior']:checked").val();
-    let timeValidator = $("input[name='time']:checked").val();
-    let cleannesseValidator = $("input[name='cleanness']:checked").val();
-    let materialValidator = $("input[name='material']:checked").val();
-    // let materialPriceValidator = document.forms['contact']['materialPrice'].value;
-    let tpsValidator = $("input[name='tps']:checked").val();
-    let workmanshipValidator = $("input[name='workmanship']:checked").val();
-    let previewValidator = document.forms['contact']['preview'].value;
-    let priceValidator = $("input[name='price']:checked").val();
-    let knowUsAboutValidator = $("input[name='knowUsAbout']:checked").val();
-    let ratingValidator = $("input[name='rating']:checked").val();
-    let replayValidator = document.forms['contact']['replay'].value;
-
-
-    if (behaviorValidator == null) {
+    if (behaviorValidator == null || behaviorValidator == "") {
         $(".error1").addClass("show");
         return false;
     }
 
-    if (timeValidator == null) {
+    if (timeValidator == null || timeValidator == "") {
         $(".error2").addClass("show");
         return false;
     }
 
-    if (cleannesseValidator == null) {
+    if (cleannesseValidator == null || cleannesseValidator == "") {
         $(".error3").addClass("show");
         return false;
     }
 
-    if (materialValidator == null) {
+    if (materialValidator == null || materialValidator == "") {
         $(".error4").addClass("show");
         return false;
     }
 
-    // if (materialPriceValidator == "") {
-    //     $(".error5").addClass("show");
-    //     return false;
-    // }
-
-
-    if (tpsValidator == null) {
+    if (tpsValidator == null || tpsValidator == "") {
         $(".error6").addClass("show");
         return false;
     }
 
-    if (workmanshipValidator == null) {
+    if (workmanshipValidator == null || workmanshipValidator == "") {
         $(".error7").addClass("show");
         return false;
     }
 
-    if (previewValidator == "") {
+    if (previewValidator == null || previewValidator == "") {
         $(".error8").addClass("show");
         return false;
     }
 
-    if (priceValidator == null) {
+    if (priceValidator == null || priceValidator == "") {
         $(".error9").addClass("show");
         return false;
     }
-    if (knowUsAboutValidator == null) {
+    if (knowUsAboutValidator == null || knowUsAboutValidator == "") {
         $(".error10").addClass("show");
         return false;
     }
 
-    if (ratingValidator == null) {
+    if (ratingValidator == null || ratingValidator == "") {
         $(".error11").addClass("show");
         return false;
     }
 
-    if (replayValidator == "") {
+    if (replayValidator == null || replayValidator == "") {
         $(".error12").addClass("show");
         return false;
     }
-
+    return false;
 }
+
+
+$("form").on('submit', function(e) {
+    validation();
+    e.preventDefault();
+    e.validation();
+});
