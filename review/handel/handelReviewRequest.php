@@ -108,7 +108,7 @@
 
 	echo $material;	echo "\r\n";
 
-	$materialPrice = 0;
+	//$materialPrice = 0;
 	echo $materialPrice; echo "\r\n";
 
 	echo $tps; echo "\r\n";
@@ -117,7 +117,7 @@
 
 	echo $workmanshipInp;	echo "\r\n";
 
-	$preview = 5;
+	//$preview = 5;
 	echo $preview;	echo "\r\n";
 
 	echo $price;	echo "\r\n";

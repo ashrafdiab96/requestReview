@@ -86,12 +86,12 @@
                         مقبول
                     </label>
                     <label class="btn btn-outline-warning btnActiveBehavior">
-                        <input name="behavior" type="radio" class="behaviorError" value="سيئ">
-                        سيئ
+                        <input name="behavior" type="radio" class="behaviorError" value="سئ">
+                        سئ
                     </label>
                     <label class="btn btn-outline-danger btnActiveBehavior">
-                        <input name="behavior" type="radio" class="behaviorError" value="سيئ جدا">
-                        سيئ جدا
+                        <input name="behavior" type="radio" class="behaviorError" value="سئ جدا">
+                        سئ جدا
                     </label>
                 </div>
             </fieldset>
@@ -135,13 +135,13 @@
                 </label>
                 <label class="btn btn-outline-danger btnActiveMaterial" id="materialBtnNo">
                     <input name="material" type="radio" value="0" class="material">
-                    ماجابش خامات
+                    مجبش خامات
                 </label>
             </fieldset>
-            <fieldset class="materialPrice">
-                <label>قيمة الخامات <span class="requiredStar">*</span></label>
+            <fieldset class="materialPrice" >
+                <label>طيب سعر الخامات بكام ؟ <span class="requiredStar">*</span></label>
                 <span class="error5">هذا الحقل مطلوب</span>
-                <input name="materialPrice" placeholder="الخامات بكام" type="text">                
+                <input name="materialPrice" placeholder="سعر الخامات بالجنية" type="text">                
             </fieldset>
             <hr>
             <fieldset id="tps">
@@ -154,7 +154,7 @@
                 </label>
                 <label class="btn btn-outline-danger btnActiveTps">
                     <input name="tps" type="radio" value="0" class="tps">
-                    ما أخدش تبس
+                    لا مخدش حاجه
                 </label>
             </fieldset>
             <hr>
@@ -172,24 +172,24 @@
                 <span class='error9'>هذا الحقل مطلوب</span>
                 <br>
                 <label class="btn btn-outline-success btnActivePrice">
-                    <input name="price" type="radio" value="كويسة قوي" class="price">
-                    كويسة قوي
+                    <input name="price" type="radio" value="كويسة جدا" class="price">
+                    كويسة جدا
                 </label>
                 <label class="btn btn-outline-primary btnActivePrice">
                     <input name="price" type="radio" value="كويسة" class="price">
                     كويسة
                 </label>
                 <label class="btn btn-outline-secondary btnActivePrice">
-                    <input name="price" type="radio" value="مقبولة" class="price">
-                    مقبولة
+                    <input name="price" type="radio" value="مناسبة" class="price">
+                    مناسبة
                 </label>                
                 <label class="btn btn-outline-warning btnActivePrice">
                     <input name="price" type="radio" value="غالية شوية" class="price">
                     غالية شوية
                 </label>                
                 <label class="btn btn-outline-danger btnActivePrice">
-                    <input name="price" type="radio" value="غالية قوي" class="price">
-                    غالية قوي
+                    <input name="price" type="radio" value="غالية اوى" class="price">
+                    غالية اوى
                 </label>
             </fieldset>
             <hr>
@@ -209,28 +209,28 @@
                         <span>جروبات الفيس بوك</span>
                     </label>
                     <br>
-                    <input type="radio" id="webSite" name="knowUsAbout" value="صفحتنا" class="knowUs">
+                    <input type="radio" id="webSite" name="knowUsAbout" value="صديق" class="knowUs">
                     <label title="صفحتنا">
                         <i class="far fa-file-code fa-2x"></i>
-                        <span>موقعنا على الانترنت </span>
+                        <span>صديق</span>
                     </label>
                     <br>
-                    <input type="radio" id="friend" name="knowUsAbout" value="صديق-جار" class="knowUs">
+                    <input type="radio" id="friend" name="knowUsAbout" value="جيران" class="knowUs">
                     <label title="جار-صديق">
                         <i class="fas fa-user-friends fa-2x"></i>
-                        <span> جار - صديق </span>
+                        <span>جيران</span>
                     </label>
                     <br>
-                    <input type="radio" id="banner" name="knowUsAbout" value="يافطة" class="knowUs">
+                    <input type="radio" id="banner" name="knowUsAbout" value="عميل" class="knowUs">
                     <label title="يافطة">
                         <i class="fas fa-band-aid fa-2x"></i>
-                        <span> يافطة إعلانية </span>
+                        <span>عميل</span>
                     </label>
                     <br>
-                    <input type="radio" id="advertising" name="knowUsAbout" value="الإعلانات المطبوعة" class="knowUs">
+                    <input type="radio" id="advertising" name="knowUsAbout" value="اعلانات" class="knowUs">
                     <label title="الإعلانات المطبوعة">
                         <i class="fas fa-ad fa-2x"></i>
-                        <span> الإعلانات المطبوعة </span>
+                        <span>الإعلانات المطبوعة</span>
                     </label>
                 </div>
             </fieldset>
@@ -263,30 +263,30 @@
             </fieldset>
             <hr>
             <fieldset class="ratingSystem">
-                <label>تقييم الخدمة <span class="requiredStar">*</span></label>
-                <div class="star-rating">
-                    <input id="star-1" type="radio" name="rating" value="5" class="ratingSystem">
-			        <label for="star-1" title="5 stars">
+                <label>تقييم الفني <span class="requiredStar2">*</span></label>
+                    <div class="star-ratingServ">
+                    <input id="star-1Serv" type="radio" name="ratingServ" value="5" class="preview">
+			        <label for="star-1Serv" title="5 stars">
 					    <i class="active fa fa-star" aria-hidden="true"></i>
                     </label>
-                    <input id="star-2" type="radio" name="rating" value="4" class="ratingSystem">
-		 	        <label for="star-2" title="4 stars">
+                    <input id="star-2Serv" type="radio" name="ratingServ" value="4" class="preview">
+		 	        <label for="star-2Serv" title="4 stars">
 					    <i class="active fa fa-star" aria-hidden="true"></i>
                     </label>
-                    <input id="star-3" type="radio" name="rating" value="3" class="ratingSystem">
-			        <label for="star-3" title="3 stars">
+                    <input id="star-3Serv" type="radio" name="ratingServ" value="3" class="preview">
+			        <label for="star-3Serv" title="3 stars">
 					    <i class="active fa fa-star" aria-hidden="true"></i>
                     </label>
-                    <input id="star-4" type="radio" name="rating" value="2" class="ratingSystem">
-			        <label for="star-4" title="2 stars">
+                    <input id="star-4Serv" type="radio" name="ratingServ" value="2" class="preview">
+			        <label for="star-4Serv" title="2 stars">
 					    <i class="active fa fa-star" aria-hidden="true"></i>
 			        </label>
-			        <input id="star-5" type="radio" name="rating" value="1" class="ratingSystem">
-			        <label for="star-5" title="1 star">
+			        <input id="star-5Serv" type="radio" name="ratingServ" value="1" class="preview">
+			        <label for="star-5Serv" title="1 star">
 					    <i class="active fa fa-star" aria-hidden="true"></i>
 			        </label>
                 </div>
-                <span class='error11'>هذا الحقل مطلوب</span>
+                <span class='error13'>هذا الحقل مطلوب</span>
             </fieldset>
             <hr>
             <fieldset class="replay">

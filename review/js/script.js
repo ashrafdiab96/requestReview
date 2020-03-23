@@ -134,7 +134,7 @@ function validation() {
 	else{
 		$(".error4").removeClass("show");
 	}
-
+	
     var tpsValidator = document.forms["contact"]["tps"].value;
     if (tpsValidator == null || tpsValidator == "") {
         $(".error6").addClass("show");
@@ -195,6 +195,16 @@ function validation() {
 		$(".error11").removeClass("show");	
 	}
 
+    var ratingServValidator = document.forms["contact"]["ratingServ"].value;
+    if (ratingValidator == null || ratingValidator == "") {
+        $(".error13").addClass("show");
+		focusOnElement("ratingServ");
+        return false;
+    }
+	else{
+		$(".error13").removeClass("show");		
+	}
+    
     var replayValidator = document.forms['contact']['replay'].value;
     if (replayValidator == null || replayValidator == "") {
         $(".error12").addClass("show");
