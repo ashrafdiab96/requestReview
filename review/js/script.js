@@ -120,6 +120,12 @@ function validation() {
         $(".error4").addClass("show");
         return false;
     }
+    if(materialValidator == "جاب خامات"){
+        var materialBuyingValidator = document.forms["contact"]["materialPrice"].value;
+        if(materialBuyingValidator == null || materialBuyingValidator == ""){
+            $(".error5").addClass("show");
+        }
+    }
 
     /*********************************************************************/
     var tpsValidator = document.forms["contact"]["tps"].value;
