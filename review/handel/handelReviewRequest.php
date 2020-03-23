@@ -98,7 +98,7 @@
 		$replay = $_GET['replay'];
 	}
 
-	echo $requestID; echo "\r\n";
+	echo "ID: ".$requestID; echo "\r\n";
 
 	echo $behavior; echo "\r\n";
 	
@@ -109,22 +109,22 @@
 	echo $material;	echo "\r\n";
 
 	//$materialPrice = 0;
-	echo $materialPrice; echo "\r\n";
-
 	echo $tps; echo "\r\n";
 
-	//echo $workmanship;	echo "\r\n";
+	echo " -- Material price: ".$materialPrice; echo "\r\n";
 
-	echo $workmanshipInp;	echo "\r\n";
+	echo " -- cost ".$workmanship;	echo "\r\n";
+
+	echo " -- cost ".$workmanshipInp;	echo "\r\n";
 
 	//$preview = 5;
-	echo $preview;	echo "\r\n";
+	echo " -- preview ".$preview;	echo "\r\n";
 
 	echo $price;	echo "\r\n";
 
 	echo $knowUs; 	echo "\r\n";
 
-	echo $rating;	echo "\r\n";
+	echo " -- rate ".$rating;	echo "\r\n";
 
 	echo $replay; 
 	insert($conn, $requestID, $workmanshipInp, $price, $time, $tps, $cleaness, $material, $materialPrice, $preview, $rating, $replay, $behavior);
