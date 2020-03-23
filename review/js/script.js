@@ -155,6 +155,12 @@ function validation() {
         return false;
     }
 
+    var ratingServValidator = document.forms["contact"]["ratingServ"].value;
+    if (ratingValidator == null || ratingValidator == "") {
+        $(".error13").addClass("show");
+        return false;
+    }
+    
     var replayValidator = document.forms['contact']['replay'].value;
     if (replayValidator == null || replayValidator == "") {
         $(".error12").addClass("show");
