@@ -94,6 +94,10 @@
 		$rating = $_GET['rating'];
 	}
 
+        if(isset($_GET['ratingServ'])){
+            $ratingServ = $_GET['ratingServ'];
+        }
+
 	if (isset($_GET['replay'])) {
 		$replay = $_GET['replay'];
 	}
