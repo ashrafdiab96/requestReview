@@ -209,17 +209,29 @@ fieldset {
 
 /* styling star rating system */
 
-.star-rating {
+/*********************************************************************/
+/*********************************************************************/
+
+#contact label {
+    font-size: 18px;
+    font-family: 'Cairo', sans-serif;
+}
+
+#contact .preview .requiredStar {
+    color: red;
+}
+
+.preview .star-rating {
     direction: ltr;
     display: inline-block;
     padding: 20px
 }
 
-.star-rating input[type=radio] {
+.preview .star-rating input[type=radio] {
     display: none;
 }
 
-.star-rating label {
+.preview .star-rating label {
     color: #bbb;
     font-size: 18px;
     padding: 0;
@@ -228,11 +240,45 @@ fieldset {
     transition: all .3s ease-in-out;
 }
 
-.star-rating label:hover,
-.star-rating label:hover~label,
-.star-rating input[type=radio]:checked~label {
+.preview .star-rating label:hover,
+.preview .star-rating label:hover~label,
+.preview .star-rating input[type=radio]:checked~label {
     color: #f2b600;
 }
+
+
+/*****************************************************************/
+/*****************************************************************/
+
+#contact .ratingSystem .requiredStar2 {
+    color: red;
+}
+
+.ratingSystem .star-ratingServ {
+    direction: ltr;
+    display: inline-block;
+    padding: 20px
+}
+
+.ratingSystem .star-ratingServ input[type=radio] {
+    display: none;
+}
+
+.ratingSystem .star-ratingServ label {
+    color: #bbb;
+    font-size: 18px;
+    padding: 0;
+    cursor: pointer;
+    -webkit-transition: all .3s ease-in-out;
+    transition: all .3s ease-in-out;
+}
+
+.ratingSystem .star-ratingServ label:hover,
+.ratingSystem .star-ratingServ label:hover~label,
+.ratingSystem .star-ratingServ input[type=radio]:checked~label {
+    color: #f2b600;
+}
+
 
 
 /* styling knoe us section */
