@@ -319,30 +319,30 @@ function checkRequesIDInDB($requestID){
             </fieldset>
             <hr>
             <fieldset class="ratingSystem">
-                <label>تقييم الخدمة <span class="requiredStar">*</span></label>
-                <div class="star-rating">
-                    <input id="star-1" type="radio" name="rating" value="خمس نجمات" class="ratingSystem">
-			        <label for="star-1" title="5 stars">
+                <label>تقييم الفني <span class="requiredStar2">*</span></label>
+                    <div class="star-ratingServ">
+                    <input id="star-1Serv" type="radio" name="ratingServ" value="خمس نجمات" class="preview">
+			        <label for="star-1Serv" title="5 stars">
 					    <i class="active fa fa-star" aria-hidden="true"></i>
                     </label>
-                    <input id="star-2" type="radio" name="rating" value="أربع نجمات" class="ratingSystem">
-		 	        <label for="star-2" title="4 stars">
+                    <input id="star-2Serv" type="radio" name="ratingServ" value="أربع نجمات" class="preview">
+		 	        <label for="star-2Serv" title="4 stars">
 					    <i class="active fa fa-star" aria-hidden="true"></i>
                     </label>
-                    <input id="star-3" type="radio" name="rating" value="ثلاث نجمات" class="ratingSystem">
-			        <label for="star-3" title="3 stars">
+                    <input id="star-3Serv" type="radio" name="ratingServ" value="ثلاث نجمات" class="preview">
+			        <label for="star-3Serv" title="3 stars">
 					    <i class="active fa fa-star" aria-hidden="true"></i>
                     </label>
-                    <input id="star-4" type="radio" name="rating" value="نجمتان" class="ratingSystem">
-			        <label for="star-4" title="2 stars">
+                    <input id="star-4Serv" type="radio" name="ratingServ" value="نجمتان" class="preview">
+			        <label for="star-4Serv" title="2 stars">
 					    <i class="active fa fa-star" aria-hidden="true"></i>
 			        </label>
-			        <input id="star-5" type="radio" name="rating" value="نجمة واحدة" class="ratingSystem">
-			        <label for="star-5" title="1 star">
+			        <input id="star-5Serv" type="radio" name="ratingServ" value="نجمة واحدة" class="preview">
+			        <label for="star-5Serv" title="1 star">
 					    <i class="active fa fa-star" aria-hidden="true"></i>
 			        </label>
                 </div>
-                <span class='error13'>هذا الحقل مطلوب</span>
+                <span class='error11'>هذا الحقل مطلوب</span>
             </fieldset>
             <hr>
             <fieldset class="replay">
