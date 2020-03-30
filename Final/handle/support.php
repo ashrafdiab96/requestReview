@@ -1,12 +1,7 @@
 ﻿<?php
-
-	/* connect to database */
-	$serverName = "den1.mysql6.gear.host";
-	$userName = "sanyaatest";
-	$dbPass = "Ko6j1572F7_~";
-	$dbName = "sanyaatest";
-	$conn = new mysqli ($serverName , $userName , $dbPass , $dbName);
-	
+	include '/db_connect.php';
+	$db = new DB_CONNECT();
+    $conn = $db->connect();
 	/** 
 	 * Purpose: check request id and return true if it is int larger than 0
 	 * Type Contract: mixed -> unsigned int
@@ -42,11 +37,11 @@
 	 *   checkRequestIfExist(113) -> Return True
 	 *   checkRequestIfExist(100000) -> Return False
 	*/
-    function checkRequestIfExist($requestID, $conn) {
+    function checkRequestIfExist($requestID) {
 		$sqlQuery = "SELECT COUNT(request_id) AS request_count
                        FROM request_t
                        WHERE request_id = $requestID";
-		$requestCount = sqlExcuteScaler($sqlQuery, $conn);
+		$requestCount = sqlExcuteScaler($sqlQuery);
 		if((int)$requestCount >= 1){
 			return true;
 		}
@@ -64,11 +59,11 @@
 	 *   checkRequestIfReviewed(200) -> Return False
 	 *   checkRequestIfReviewed(202) -> Return True
 	*/
-    function checkRequestIfReviewed($requestID, $conn) {
+    function checkRequestIfReviewed($requestID) {
 		$sqlQuery = "SELECT COUNT(request_id) AS request_count
                        FROM follow_up_t
                        WHERE request_id = $requestID";
-		$requestCount = sqlExcuteScaler($sqlQuery, $conn);
+		$requestCount = sqlExcuteScaler($sqlQuery);
 		if((int)$requestCount >= 1){
 			return true;
 		}
@@ -87,9 +82,9 @@
 	 *   getCost(300) -> Return 0
 	 *   getCost(400) -> Return 38.25
 	*/
-	function getCost($requestID, $conn) {
+	function getCost($requestID) {
 		$query = "SELECT cost FROM request_stages_t WHERE request_id = $requestID";
-		$cost = sqlExcuteScaler($query, $conn);
+		$cost = sqlExcuteScaler($query);
 		return $cost;
 	}
 	
@@ -103,8 +98,8 @@
 	 *   checkRequestIfExist(200) -> Return True
 	 *   checkRequestIfExist(202) -> Return False
 	*/
-    function sqlExcuteScaler($query, $conn) {
-		$sqlResult = $conn->query($query);
+    function sqlExcuteScaler($query) {
+		$sqlResult = $GLOBALS['conn']->query($query);
 		if($sqlResult){
 			while($row = mysqli_fetch_array($sqlResult)){
 				$resultScaler = $row[0];
@@ -125,7 +120,7 @@
 	 *   Insert
 	 *   Insert
 	*/
-	function insert($conn, $requestID, $paid, $prices, $time, $tps, $cleaness, $product, $productCost, $technicalRate, $serviceRate, $clientReview, $behavior){
+	function insertRecord($requestID, $paid, $prices, $time, $tps, $cleaness, $product, $productCost, $technicalRate, $serviceRate, $clientReview, $behavior){
 		$query = "INSERT INTO follow_up_t
 			(request_id,
 			 paid,
@@ -153,9 +148,10 @@
 			 '$productCost',
 			 '$clientReview',
 			 '$behavior',
-			 '1')";
-			 echo $query;
-			 $sqlResult = $conn->query($query);
+			 '600')";
+			 $sqlResult = $GLOBALS['conn']->query($query);
+			 $sqlResult = $GLOBALS['conn']->query("UPDATE request_t SET request_status = 20 WHERE request_id = '$requestID'");
+			 return $sqlResult;
 	}
 	
 	/** 
@@ -168,22 +164,13 @@
 	 *   updateKnowUs(400, "صفحتنا") -> Return True
 	 *   updateKnowUs(400, "") -> Return False
 	*/
-	
-	/**
-	static function updateKnowUs(int $reqeustID, string $knowUs) {
-		if(checkRequestIDIfUnsigned($requestID) == false){
-			return false;
-		}
-
+    function updateKnowUs($reqeustID, $knowUs) {
 		if($knowUs == NULL){
 			return false;
 		}
-		/** 
-		 * Update know us in client table
-		 * Query Update client_t JOIN request_t ON client_t.client_id = request_t.client_id SET client_know_us = '$knowUs' WHERE request_t.request_id = $reqeustID
-		/
-		// Return true is there is no error happen
+		$query = "Update client_t JOIN request_t ON client_t.client_id = request_t.client_id SET client_know_us = '$knowUs' WHERE request_t.request_id = '$reqeustID'";
+		$sqlResult = $GLOBALS['conn']->query($query);
+		return $sqlResult;
 	}
-	*/
-//}
+	
 ?>

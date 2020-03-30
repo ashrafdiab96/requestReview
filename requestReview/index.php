@@ -4,7 +4,7 @@
 	//get request_id
 	$request_id = 0;
 	$request_id = $_GET['id'];
-
+	$_SESSION['request_id'] = $request_id;
 	if(!checkRequestIDIfUnsigned($request_id)){
 		header("Location: error.html"); die;
 	}
@@ -23,7 +23,7 @@
 	}
 	
 	$cost = getCost($request_id, $conn);
-
+	
 ?>
 
 

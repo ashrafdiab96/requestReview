@@ -1,4 +1,3 @@
-// alert("welcome55555");
 (function($) {
 
     /* show material price field if getting material */
@@ -15,9 +14,30 @@
     $('.clientReply').click(function() {
         $('.suggestedReply').fadeIn(400);
     });
+	
+	$('#span-facebook-page').click(function() {
+       document.forms["contact"]["knowUsAbout"][0].checked = true;
+    });
+	
+	$('#span-facebook-group').click(function() {
+       document.forms["contact"]["knowUsAbout"][1].checked = true;
+    });
+	
+	$('#span-friend').click(function() {
+       document.forms["contact"]["knowUsAbout"][2].checked = true;
+    });
+	
+	$('#span-neighbour').click(function() {
+       document.forms["contact"]["knowUsAbout"][3].checked = true;
+    });
+	
+	$('#span-customer').click(function() {
+       document.forms["contact"]["knowUsAbout"][4].checked = true;
+    });
 
-
-
+	$('#span-ads').click(function() {
+       document.forms["contact"]["knowUsAbout"][5].checked = true;
+    });
 })(jQuery);
 
 /* add active class to behavior buttons when click on it */
@@ -95,7 +115,6 @@ for (var i = 0; i < btns.length; i++) {
 /* validation of fields */
 function validation() {
     var behaviorValidator = document.forms["contact"]["behavior"].value;
-    // alert(behaviorValidator);
     if (behaviorValidator == null || behaviorValidator == "") {
         $(".error1").addClass("show");
 		focusOnElement("behavior");
@@ -135,6 +154,20 @@ function validation() {
 		$(".error4").removeClass("show");
 	}
 	
+	
+	if(materialValidator == 1){
+        var materialBuyingValidator = document.forms["contact"]["materialPriceC"].value;
+        if(materialBuyingValidator == null || materialBuyingValidator == ""){
+			focusOnElement("materialPrice");
+            $(".error5").addClass("show");
+			return false;
+        }
+		else{
+			$(".error5").removeClass("show");
+		}
+    }
+	
+	
     var tpsValidator = document.forms["contact"]["tps"].value;
     if (tpsValidator == null || tpsValidator == "") {
         $(".error6").addClass("show");
@@ -155,17 +188,7 @@ function validation() {
 		$(".error7").removeClass("show");		
 	}
 
-    var previewValidator = document.forms["contact"]["preview"].value;
-    if (previewValidator == null || previewValidator == "") {
-        $(".error8").addClass("show");
-		focusOnElement("preview");
-        return false;
-    }
-	else{
-		$(".error8").removeClass("show");		
-	}
-
-    var priceValidator = document.forms["contact"]["price"].value;
+	var priceValidator = document.forms["contact"]["price"].value;
     if (priceValidator == null || priceValidator == "") {
         $(".error9").addClass("show");
 		focusOnElement("price");
@@ -174,8 +197,8 @@ function validation() {
 	else{
 		$(".error9").removeClass("show");		
 	}
-
-    var knowUsAboutValidator = document.forms["contact"]["knowUsAbout"].value;
+	
+	var knowUsAboutValidator = document.forms["contact"]["knowUsAbout"].value;
     if (knowUsAboutValidator == null || knowUsAboutValidator == "") {
         $(".error10").addClass("show");
 		focusOnElement("knowUsAbout");
@@ -184,21 +207,21 @@ function validation() {
 	else{
 		$(".error10").removeClass("show");	
 	}
-
+	
     var ratingValidator = document.forms["contact"]["rating"].value;
     if (ratingValidator == null || ratingValidator == "") {
         $(".error11").addClass("show");
-		focusOnElement("rating");
+		focusOnElement("preview");
         return false;
     }
 	else{
 		$(".error11").removeClass("show");	
 	}
-
+	
     var ratingServValidator = document.forms["contact"]["ratingServ"].value;
-    if (ratingValidator == null || ratingValidator == "") {
+    if (ratingServValidator == null || ratingServValidator == "") {
         $(".error13").addClass("show");
-		focusOnElement("ratingServ");
+		focusOnElement("ratingSystem");
         return false;
     }
 	else{
@@ -214,7 +237,8 @@ function validation() {
 	else{
 		$(".error12").removeClass("show");		
 	}
-    return false;
+	//location.href="handel/handelReviewRequest.php";
+    return true;
 }
 
 function focusOnElement(elementID){
@@ -225,7 +249,8 @@ function focusOnElement(elementID){
 
 
 $("form").on('submit', function(e) {
-    validation();
-    e.preventDefault();
+    if(!validation()){
+		e.preventDefault();
+	}
     e.validation();
 });

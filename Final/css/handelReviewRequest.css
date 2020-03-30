@@ -1,0 +1,16 @@
+body {
+    background: linear-gradient(90deg, rgba(61, 158, 164, 1) 48%, rgba(87, 181, 255, 1) 100%);
+    font-family: 'Cairo', sans-serif;
+}
+
+.thankContainer {
+    text-align: center;
+    position: relative;
+    top: 40%;
+    color: #ffffff;
+    height: 100%;
+}
+
+.row {
+    height: 100%;
+}

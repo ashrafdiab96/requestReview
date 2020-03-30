@@ -1,0 +1,417 @@
+/* body */
+
+body {
+    font-family: 'Cairo', sans-serif;
+    font-weight: 100;
+    font-size: 12px;
+    line-height: 30px;
+    color: #777;
+    background: #bec6c5;
+}
+
+
+/* header styling */
+
+.header {
+    padding: 20px;
+    text-align: center;
+    background: linear-gradient(90deg, rgba(61, 158, 164, 1) 48%, rgba(87, 181, 255, 1) 100%);
+    color: white;
+    font-size: 30px;
+}
+
+
+/* container styling */
+
+.container {
+    max-width: 600px;
+    width: 100%;
+    margin: 0 auto;
+    position: relative;
+}
+
+
+/* form styling */
+
+#contact {
+    background: #F9F9F9;
+    padding: 25px;
+    margin: 50 0;
+    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+}
+
+
+/* horizontal line styling */
+
+#contact hr {
+    background-color: #4CAF50;
+}
+
+
+/* fieldset (inputs and lables container) styling */
+
+fieldset {
+    border: medium none !important;
+    margin: 0 0 10px;
+    min-width: 100%;
+    padding: 0;
+    width: 100%;
+}
+
+
+/* styling input of type test */
+
+#contact input[type="text"],
+#contact textarea {
+    width: 100%;
+    border: 1px solid #ccc;
+    background: #FFF;
+    margin: 0 0 5px;
+    padding: 10px;
+}
+
+
+/* styling input of type test on hover */
+
+#contact input[type="text"]:hover,
+#contact textarea:hover {
+    -webkit-transition: border-color 0.3s ease-in-out;
+    -moz-transition: border-color 0.3s ease-in-out;
+    transition: border-color 0.3s ease-in-out;
+    border: 1px solid #4CAF50;
+}
+
+
+/* textarea styling */
+
+#contact textarea {
+    height: 100px;
+    max-width: 100%;
+    resize: none;
+    margin-bottom: 20px;
+}
+
+
+/* lable styling */
+
+#contact label {
+    font-size: 18px;
+    font-family: 'Cairo', sans-serif;
+}
+
+#contact .requiredStar {
+    color: red;
+}
+
+
+/* buttons styling */
+
+#contact input[type="button"] {
+    font-size: 15px;
+    margin-bottom: 10px;
+    font-family: 'Cairo', sans-serif;
+}
+
+
+/* class to style buttons after clicked */
+
+.activeBtnBehavior,
+.activeBtnTime,
+.activeBtnCleaness,
+.activeBtnMaterial,
+.activeBtnTps,
+.activeBtnPrice {
+    background-color: green;
+    color: #fff;
+    border: none;
+}
+
+
+/* hide material price section to show it after an action */
+
+.materialPrice {
+    display: none;
+}
+
+
+/* hide radio box on buttons */
+
+#contact input[name="behavior"],
+#contact input[name="time"],
+#contact input[name="cleanness"],
+#contact input[name="material"],
+#contact input[name="tps"],
+#contact input[name="price"] {
+    display: none;
+}
+
+
+/* styling submit button */
+
+#contact button[name="submit"] {
+    font-family: 'Cairo', sans-serif;
+    cursor: pointer;
+    width: 100%;
+    border: none;
+    background: #4CAF50;
+    color: #FFF;
+    margin: 0 0 5px;
+    padding: 10px;
+    font-size: 18px;
+}
+
+
+/* styling submit button on hover */
+
+#contact button[type="submit"]:hover {
+    background: #43A047;
+    -webkit-transition: background 0.3s ease-in-out;
+    -moz-transition: background 0.3s ease-in-out;
+    transition: background-color 0.3s ease-in-out;
+}
+
+#contact button[type="submit"]:active {
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.5);
+}
+
+
+/* input and textarea on active */
+
+#contact input:focus,
+#contact textarea:focus {
+    outline: 0;
+    border: 1px solid #aaa;
+}
+
+
+/* styling placeholder */
+
+::-webkit-input-placeholder {
+    color: #888;
+    font-family: 'Cairo', sans-serif;
+}
+
+:-moz-placeholder {
+    color: #888;
+    font-family: 'Cairo', sans-serif;
+}
+
+::-moz-placeholder {
+    color: #888;
+    font-family: 'Cairo', sans-serif;
+}
+
+:-ms-input-placeholder {
+    color: #888;
+    font-family: 'Cairo', sans-serif;
+}
+
+
+/* styling star rating system */
+
+/*********************************************************************/
+/*********************************************************************/
+
+#contact label {
+    font-size: 18px;
+    font-family: 'Cairo', sans-serif;
+}
+
+#contact .preview .requiredStar {
+    color: red;
+}
+
+.preview .star-rating {
+    direction: ltr;
+    display: inline-block;
+    padding: 20px
+}
+
+.preview .star-rating input[type=radio] {
+    display: none;
+}
+
+.preview .star-rating label {
+    color: #bbb;
+    font-size: 18px;
+    padding: 0;
+    cursor: pointer;
+    -webkit-transition: all .3s ease-in-out;
+    transition: all .3s ease-in-out;
+}
+
+.preview .star-rating label:hover,
+.preview .star-rating label:hover~label,
+.preview .star-rating input[type=radio]:checked~label {
+    color: #f2b600;
+}
+
+
+/*****************************************************************/
+/*****************************************************************/
+
+#contact .ratingSystem .requiredStar2 {
+    color: red;
+}
+
+.ratingSystem .star-ratingServ {
+    direction: ltr;
+    display: inline-block;
+    padding: 20px
+}
+
+.ratingSystem .star-ratingServ input[type=radio] {
+    display: none;
+}
+
+.ratingSystem .star-ratingServ label {
+    color: #bbb;
+    font-size: 18px;
+    padding: 0;
+    cursor: pointer;
+    -webkit-transition: all .3s ease-in-out;
+    transition: all .3s ease-in-out;
+}
+
+.ratingSystem .star-ratingServ label:hover,
+.ratingSystem .star-ratingServ label:hover~label,
+.ratingSystem .star-ratingServ input[type=radio]:checked~label {
+    color: #f2b600;
+}
+
+
+
+/* styling knoe us section */
+
+.knowUsAbout #facebook,
+#twitter,
+#webSite,
+#friend,
+#banner,
+#advertising {
+    margin: 12px;
+}
+
+.fa-facebook-square {
+    color: #3B4BFF;
+}
+
+.fa-twitter-square {
+    color: #35B0E8;
+}
+
+.fa-file-code {
+    color: #FFB13B;
+}
+
+.fa-user-friends {
+    color: #2CEB6F;
+}
+
+.fa-band-aid {
+    color: #CEA0EB;
+}
+
+.fa-ad {
+    color: #E88D17;
+}
+
+
+/* styling reply section */
+
+.suggestedReply {
+    display: none;
+    font-family: 'Cairo', sans-serif;
+    font-size: 14px;
+}
+
+.suggestedReplyStyle {
+    width: 100%;
+    padding: 5px;
+    border: 1px solid #000;
+}
+
+
+/* footer styling */
+
+.footer {
+    background-color: black;
+    /* position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 210px; */
+}
+
+.footerIcons a i {
+    color: white;
+    margin: 10px;
+}
+
+.footerIcons a .facebook:hover {
+    color: #6374FF;
+}
+
+.footerIcons a .android:hover {
+    color: #89FF57;
+}
+
+.footerIcons a .ios:hover {
+    color: gray;
+}
+
+.footerIcons {
+    width: 100%;
+    position: relative;
+}
+
+.icons {
+    display: flex;
+    justify-content: center;
+}
+
+.footerLinks {
+    width: 100%;
+    position: relative;
+}
+
+.links {
+    display: flex;
+    justify-content: center;
+}
+
+.links {
+    color: #ff4b5a;
+}
+
+footer .copy {
+    background: linear-gradient(90deg, rgba(61, 158, 164, 1) 48%, rgba(87, 181, 255, 1) 100%);
+}
+
+
+/* styling errors */
+
+.error1,
+.error2,
+.error3,
+.error4,
+.error5,
+.error6,
+.error7,
+.error8,
+.error9,
+.error10,
+.error11,
+.error12,
+.error13 {
+    /* background-color: #FF897D; */
+    color: red;
+    padding: 0 5px;
+    display: none;
+}
+
+
+/* class to show an hide elements after an action */
+
+.show {
+    display: block;
+}
